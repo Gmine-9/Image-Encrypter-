@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Encryption/Decryption</title>
+</head>
+<body>
+  <h1>Image Encryption/Decryption</h1>
+  <input type="file" id="imageInput" accept=".png, .jpg, .jpeg">
+  <br><br>
+  <button onclick="encryptImage()">Encrypt Image</button>
+  <button onclick="decryptImage()">Decrypt Image</button>
+  <br><br>
+  <textarea id="output" rows="10" cols="50"></textarea>
+
+  <script>
+    function encryptImage() {
+      var input = document.getElementById('imageInput');
+      var file = input.files[0];
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        var encryptedData = btoa(reader.result);
+        document.getElementById('output').value = encryptedData;
+      };
+      reader.readAsBinaryString(file);
+    }
+
+    function decryptImage() {
+      var input = document.getElementById('imageInput');
+      var file = input.files[0];
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        var decryptedData = atob(reader.result);
+        document.getElementById('output').value = decryptedData;
+      };
+      reader.readAsText(file);
+    }
+  </script>
+</body>
+</html>
